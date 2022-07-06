@@ -42,16 +42,40 @@ void init_target_properties(void)
 	/* get the bootloader string */
 	property_get("ro.bootloader", bootloader);
 
-	if (bootloader.find("J510FN") == 0) {
-                device = (char *)"j5xnlte";
-                model = (char *)"SM-J510FN";
-                name = (char *)"j5xnlte";
-                network_type=LTE_DEVICE;
+	if (strstr(bootloader,"J500FN")) {
+		device = (char *)"j5nlte";
+		model = (char *)"SM-J500FN";
+		network_type=LTE_DEVICE;
 	}
-	else if (bootloader.find("J510F") == 0) {
-		device = (char *)"j5xlte";
-		model = (char *)"SM-J510F";
-		name = (char *)"j5xlte";
+	else if (strstr(bootloader,"J500F")) {
+		device = (char *)"j5lte";
+		model = (char *)"SM-J500F";
+		network_type=LTE_DEVICE;
+	}
+	else if (strstr(bootloader,"J500H")) {
+		device = (char *)"j53gxx";
+		model = (char *)"SM-J500H";
+		network_type=GSM_DEVICE;
+	}
+	else if (strstr(bootloader,"J500M")) {
+		device = (char *)"j5ltedx";
+		model = (char *)"SM-J500M";
+		network_type=LTE_DEVICE;
+	}
+	else if (strstr(bootloader,"J500Y")) {
+		device = (char *)"j5ltedo";
+		model = (char *)"SM-J500Y";
+		network_type=LTE_DEVICE;
+	}
+	else if (strstr(bootloader,"J500G")) {
+		device = (char *)"j5lteub";
+		model = (char *)"SM-J500G";
+		network_type=LTE_DEVICE;
+	}
+	else if (strstr(bootloader,"J5008")) {
+		device = (char *)"j5ltechn";
+		model = (char *)"SM-J5008";
+		network_type=LTE_DEVICE;
 	}
 	else {
 		return;
@@ -60,3 +84,4 @@ void init_target_properties(void)
 	set_target_properties((char *)bootloader, device, model,
 		       network_type, operator_alpha, operator_numeric);
 }
+
